@@ -1,62 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    android:id="@+id/cardView"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/blog_card_elevation"
-    app:cardElevation="@dimen/blog_card_elevation"
-    android:layout_margin="5dp"
-    app:cardUseCompatPadding="true">
+    android:layout_height="310dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="4dp"
+    android:id="@+id/card_view"
+    card_view:cardUseCompatPadding="true">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageThumb"
-            android:layout_width="@dimen/blog_image_thumb_dim"
-            android:layout_height="@dimen/blog_image_thumb_dim"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop" />
+            android:id="@+id/thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="@string/article_image"
+            android:scaleType="centerCrop"
+          />
+
 
         <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:id="@+id/news_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_toRightOf="@+id/imageThumb"
-            android:text="Large Text"
-            android:textSize="16sp"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_below="@id/thumbnail"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="20sp"
+            tools:text="@string/sample_title"/>
 
         <TextView
-            android:id="@+id/subTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/published_time"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageThumb"
-            android:layout_alignEnd="@+id/title"
-            android:layout_alignLeft="@+id/title"
-            android:layout_alignRight="@+id/title"
-            android:layout_alignStart="@+id/title"
-            android:layout_below="@+id/title"
-            android:lines="3"
-            android:textSize="12sp"
-            android:visibility="gone"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
+            android:layout_below="@id/news_title"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textSize="15sp"
+            tools:text="@string/sample_time"/>
 
 
     </RelativeLayout>
+
+
 </android.support.v7.widget.CardView>
-
-

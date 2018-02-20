@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -43,7 +45,12 @@ import com.bumptech.glide.Glide;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -69,7 +76,7 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
     private ImageButton btnLike;
     private View tintView;
     private View mBackgroundView;
-          private FrameLayout  mContainer;
+          private RelativeLayout  mContainer;
     private ScrollView mContentLayout;
     private  String mId;
 
@@ -78,18 +85,14 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
     private Rect startBounds;
     private Rect finalBounds;
     private  FancyButton btnUrlink;
+    private  String mHtmlString="";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_blog_transition, container, false);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 
-        mParentActivity.setSupportActionBar(toolbar);
-        mParentActivity.avatarLayout.setVisibility(View.VISIBLE);
-        mParentActivity.collapseToolbar();
-        mParentActivity.avatarLayout.setVisibility(View.GONE);
 
         initViews(view);
 
@@ -108,19 +111,6 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
         if (bundle != null && bundle.containsKey("id")) {
             mId = bundle.getString("id");
         }
-
-
-
-            // Some of colors
-        int[] color = {0xFFC2185B, 0xFFB3E5FC, 0xFFFFEB3B, 0xFFF8BBD0, 0xFFFF5252,
-                0xFFE91E63, 0xFF448AFF, 0xFF00796B, 0xFFE91E63, 0xFFFF5252, 0xFFF8BBD0, 0xFF0288D1,};
-
-
-        // Setting adapter
-        //final NewFeedArticleRecyclerAdapter adapter = new NewFeedArticleRecyclerAdapter(mBlogList);
-        //mRecyclerView.setAdapter(adapter);
-
-        // Listen to the item touching
         mRecyclerView
                 .addOnItemTouchListener(new RecyclerItemClickListener(
                         mParentActivity,
@@ -132,18 +122,14 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
                                     NewsFeedListFragment.this.position = position;
                                     mParentActivity.isDetailView=false;
                                     openBlogInDetails(itemView);
+
                                 }
 
                             }
                         }));
 
 
-       /* try {
-            Glide.with(this).load(R.drawable.cover).into(mParentActivity.mBackDropView);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-*/
+
 
 
         fetchSuggestions();
@@ -164,6 +150,25 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
 
 
 
+    class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            //extractDataFromURL();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            //load extracted data into webview
+            //mWebView.loadData("<html>" + mHtmlString + "</html>", "text/html; charset=utf-8", "UTF-8");
+            subTitleTextView.setText(mArticleList.get(position).getDescription()+mHtmlString);
+
+            super.onPostExecute(aVoid);
+        }
+    }
+
 
 
 
@@ -182,11 +187,8 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
                 .placeholder(R.drawable.ic_action_favorite)
                 .crossFade()
                 .into(mImageView);
-        // Setting blog data to its views
-        // mImageView.setImageResource(mBlogList.get(position).getImageRes());
-        // tintView.setBackgroundColor(mBlogList.get(position).getBackGroundColor());
-        titleTextView.setText(mArticleList.get(position).getTitle());
-        subTitleTextView.setText(mArticleList.get(position).getDescription());
+
+        subTitleTextView.setText(mArticleList.get(position).getDescription()+mHtmlString);
         //+mParentActivity.getResources().getString(R.string.big_text));
 
         // Init Rect
@@ -411,7 +413,7 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
     }
 */
     private void initViews(View view) {
-        mContainer = (FrameLayout)view.findViewById(R.id.container);
+        mContainer = (RelativeLayout)view.findViewById(R.id.container);
         mBackgroundView = (View)view.findViewById(R.id.backgroundView);
         mContentLayout  = (ScrollView)view. findViewById(R.id.contentLayout);
         mRecyclerView = (RecyclerView)view. findViewById(R.id.recyclerView);

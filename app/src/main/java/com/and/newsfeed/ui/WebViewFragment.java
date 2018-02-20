@@ -41,7 +41,6 @@ public class WebViewFragment extends BaseFragment {
 
 
         mParentActivity = (MainActivity) getActivity();
-        mParentActivity.collapseToolbar();
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey("url")) {
             url = bundle.getString("url");

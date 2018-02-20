@@ -1,6 +1,7 @@
 package com.and.newsfeed;
 
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,13 +22,11 @@ import android.widget.LinearLayout;
 import com.and.newsfeed.interfaces_feed.OnBackPressed;
 import com.and.newsfeed.ui.BaseFragment;
 import com.and.newsfeed.ui.FragmentDrawer;
-import com.and.newsfeed.ui.NewFeedCardFragment;
+import com.and.newsfeed.ui.NewFeedSourceFragment;
 import com.and.newsfeed.ui.NewsFeedListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.attr.fragment;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, FragmentDrawer.FragmentDrawerListener {
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     public AppBarLayout mAppBarLayout;
-    private Toolbar mToolbar;
     private CoordinatorLayout coordinatorLayout;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     public ImageView mBackDropView;
@@ -69,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toggle.syncState();
 
 
-        collapseToolbar();
+       // collapseToolbar();
     }
 
 
@@ -81,22 +79,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mFragmentManager = getSupportFragmentManager();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        mBackDropView = (ImageView) findViewById(R.id.backdrop);
-        avatarLayout = (LinearLayout) findViewById(R.id.image_frame);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("News Feed");
+        toolbar.setTitleTextColor(Color.WHITE);
 
+        setSupportActionBar(toolbar);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        showNextView(new NewFeedCardFragment());
+        showNextView(new NewFeedSourceFragment());
     }
 
 
-    public void collapseToolbar() {
+    /*public void collapseToolbar() {
         mAppBarLayout.setActivated(false);
         collapsingToolbarLayout.setTitleEnabled(false);
         AppBarLayout.LayoutParams p = (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
@@ -120,8 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         lp.height = getResources().getDimensionPixelSize(R.dimen.toolbar_expanded_height);
         mAppBarLayout.requestLayout();
-        mToolbar.setTitle("");
-    }
+    }*/
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

@@ -8,22 +8,34 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.and.newsfeed.R;
 import com.and.newsfeed.adapter.NewFeedArticleRecyclerAdapter;
 import com.and.newsfeed.data.ArticleModel;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -49,6 +61,7 @@ public class BlogTransitionActivity extends AppCompatActivity {
     private int position;
     private Rect startBounds;
     private Rect finalBounds;
+    private String mHtmlString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +104,9 @@ public class BlogTransitionActivity extends AppCompatActivity {
 
                             }
                         }));
+
+
+
     }
 
 
@@ -106,7 +122,31 @@ public class BlogTransitionActivity extends AppCompatActivity {
        // mImageView.setImageResource(mBlogList.get(position).getImageRes());
        // tintView.setBackgroundColor(mBlogList.get(position).getBackGroundColor());
         titleTextView.setText(mBlogList.get(position).getTitle());
-        subTitleTextView.setText(mBlogList.get(position).getDescription());
+        Toast.makeText(this,""+mBlogList.get(position).getUrl(),Toast.LENGTH_SHORT).show();
+       /* try {
+            URL url = new URL(mBlogList.get(position).getUrl());
+
+            BufferedReader reader = null;
+            StringBuilder builder = new StringBuilder();
+
+            reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+            for (String line; (line = reader.readLine()) != null; ) {
+                builder.append(line.trim());
+            }
+
+            String start = "<div class=\"post-text\"><p>";
+            String end = "</p>";
+            String part = builder.substring(builder.indexOf(start) + start.length());
+            String question = part.substring(0, part.indexOf(end));
+            subTitleTextView.setText(mBlogList.get(position).getDescription()+question);
+        }
+        catch (Exception logOrIgnore) {
+
+        }*/
+
+
+
+
 
         // Init Rect
         startBounds = new Rect();
@@ -312,6 +352,8 @@ public class BlogTransitionActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     public void onBackPressed() {
 
@@ -332,7 +374,6 @@ public class BlogTransitionActivity extends AppCompatActivity {
         btnLike = (ImageButton) findViewById(R.id.btnLike);
         mImageView = (ImageView) findViewById(R.id.imageView);
         titleTextView = (TextView) findViewById(R.id.title);
-        subTitleTextView = (TextView) findViewById(R.id.subTitle);
     }
 
 

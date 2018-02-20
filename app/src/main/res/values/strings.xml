@@ -13,6 +13,34 @@
     <string name="step_cancel">Cancel</string>
     <string name="big_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce varius nulla a convallis elementum. Curabitur tortor sem, sodales at libero vitae, tempor pretium purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas diam lorem, hendrerit eu sagittis in, congue cursus quam. Aenean vitae mi venenatis, congue purus id, aliquet sapien. Ut pharetra mollis lectus, in mattis dolor sollicitudin vel. Nulla facilisi. Ut blandit et metus at condimentum. Phasellus ultrices tellus erat, sed elementum nulla venenatis ac. Cras tellus lectus, tristique et tristique a, feugiat vitae nunc. In hac habitasse platea dictumst. Integer orci mi, iaculis in blandit volutpat, rhoncus sed ex. Integer magna augue, hendrerit vel tortor nec, condimentum convallis ligula. Aenean interdum, urna ac faucibus rhoncus, justo turpis eleifend neque, eget maximus nibh turpis et arcu. Sed facilisis nunc in metus congue faucibus in at nisi. Fusce lobortis dignissim sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce varius nulla a convallis elementum. Curabitur tortor sem, sodales at libero vitae, tempor pretium purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas diam lorem, hendrerit eu sagittis in, congue cursus quam. Aenean vitae mi venenatis, congue purus id, aliquet sapien. Ut pharetra mollis lectus, in mattis dolor sollicitudin vel. Nulla facilisi. Ut blandit et metus at condimentum. Phasellus ultrices tellus erat, sed elementum nulla venenatis ac. Cras tellus lectus, tristique et tristique a, feugiat vitae nunc. In hac habitasse platea dictumst. Integer orci mi, iaculis in blandit volutpat, rhoncus sed ex. Integer magna augue, hendrerit vel tortor nec, condimentum convallis ligula. Aenean interdum, urna ac faucibus rhoncus, justo turpis eleifend neque, eget maximus nibh turpis et arcu. Sed facilisis nunc in metus congue faucibus in at nisi. Fusce lobortis dignissim sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas diam lorem, hendrerit eu sagittis in, congue cursus quam. Aenean vitae mi venenatis, congue purus id, aliquet sapien. Ut pharetra mollis lectus, in mattis dolor sollicitudin vel. Nulla facilisi. Ut blandit et metus at condimentum. Phasellus ultrices tellus erat, sed elementum nulla venenatis ac. Cras tellus lectus, tristique et tristique a, feugiat vitae nunc. In hac habitasse platea dictumst. Integer orci mi, iaculis in blandit volutpat, rhoncus sed ex. Integer magna augue, hendrerit vel tortor nec, condimentum convallis ligula. Aenean interdum, urna ac faucibus rhoncus, justo turpis eleifend neque, eget maximus nibh turpis et arcu. Sed facilisis nunc in metus congue faucibus in at nisi. Fusce lobortis dignissim sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas diam lorem, hendrerit eu sagittis in, congue cursus quam. Aenean vitae mi venenatis, congue purus id, aliquet sapien. Ut pharetra mollis lectus, in mattis dolor sollicitudin vel. Nulla facilisi. Ut blandit et metus at condimentum. Phasellus ultrices tellus erat, sed elementum nulla venenatis ac. Cras tellus lectus, tristique et tristique a, feugiat vitae nunc. In hac habitasse platea dictumst. Integer orci mi, iaculis in blandit volutpat, rhoncus sed ex. Integer magna augue, hendrerit vel tortor nec, condimentum convallis ligula. Aenean interdum, urna ac faucibus rhoncus, justo turpis eleifend neque, eget maximus nibh turpis et arcu. Sed facilisis nunc in metus congue faucibus in at nisi. Fusce lobortis dignissim sagittis.</string>
 
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="banner_ad_unit_id">ca-app-pub-6593579486793864/7280030636</string>
+    <string name="test">YOUR_ADMOB_APP_ID</string>
+    <string name="article_image">Article Image</string>
+    <string name="sample_title">Google IO leaves everyone in shock</string>
+    <string name="sample_author">By Anshdeep Singh</string>
+    <string name="overview">Overview</string>
+    <string name="share">Share</string>
+    <string name="favorite">Favorite</string>
+    <string name="sample_overview">Startups participating in the Startup Battlefield have all been hand-picked to participate in our highly competitive startup competition. They all presented..</string>
+    <string name="btn_text">Read full article on TechCrunch</string>
+    <string name="dash">-</string>
+    <string name="sample_subtitle">TechCrunch</string>
+    <string name="no_data">No Data</string>
+    <string name="no_news_found">No News Found :-(</string>
+    <string name="no_internet">No Internet</string>
+    <string name="no_internet_text">Please Connect to Internet and click refresh icon below</string>
+    <string name="refresh">Refresh</string>
+    <string name="sample_time">Published 8 hours ago</string>
+    <string name="technical_news_sources">Technical news sources</string>
+    <string name="powered_text">-Powered By News API</string>
+    <string name="no_articles">No favorite articles added!</string>
+    <string name="read_full_article">Read full article on</string>
+    <string name="internet_connection_msg">Please turn on your internet connection to view full article!</string>
+    <string name="article_added">Article added to favorites!</string>
+    <string name="article_removed">Article removed from favorites!</string>
     <string-array name="nav_drawer_labels">
 
         <item>@string/nav_item_home</item>

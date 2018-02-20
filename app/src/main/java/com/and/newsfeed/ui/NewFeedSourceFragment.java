@@ -1,5 +1,6 @@
 package com.and.newsfeed.ui;
 
+import android.app.ProgressDialog;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -14,8 +15,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 
 import com.and.newsfeed.R;
@@ -24,8 +23,8 @@ import com.and.newsfeed.data.SourceModel;
 import com.and.newsfeed.http.AsyncThreadPool;
 import com.and.newsfeed.http.HTTPResponseListener;
 import com.and.newsfeed.http.HttpGet;
+import com.and.newsfeed.utils.CommonUtils;
 import com.and.newsfeed.utils.NewFeedApi;
-import com.and.newsfeed.utils.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +37,7 @@ import java.util.Collections;
 /**
  * Created by sristi on 12/5/16.
  */
-public class NewFeedCardFragment extends BaseFragment implements HTTPResponseListener {
+public class NewFeedSourceFragment extends BaseFragment implements HTTPResponseListener {
 
     public final static String TAG_NAME = "NewFeedCardFragment";
     private String arrOrg[];
@@ -47,7 +46,7 @@ public class NewFeedCardFragment extends BaseFragment implements HTTPResponseLis
     private NewsFeedSourceListAdapter adapter;
     public Handler mUIHandler;
     public AsyncThreadPool mThreadPool;
-    private RelativeLayout mProgreesBarLayout;
+    private ProgressDialog mProgressDialog;
 
 
     @Override
@@ -56,8 +55,7 @@ public class NewFeedCardFragment extends BaseFragment implements HTTPResponseLis
         View view = inflater.inflate(R.layout.flat_suggestion_list, container, false);
         initializeViews(view);
         fetchSuggestions();
-        mParentActivity.collapseToolbar();
-        mParentActivity.avatarLayout.setVisibility(View.GONE);
+        mProgressDialog = new ProgressDialog(getActivity());
 
         return view;
     }
@@ -66,20 +64,20 @@ public class NewFeedCardFragment extends BaseFragment implements HTTPResponseLis
     private void initializeViews(View view) {
 
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        mParentActivity.setSupportActionBar(toolbar);
+
         mSourceModelList = new ArrayList<>();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.suggestion_list);
-        mProgreesBarLayout = (RelativeLayout) view.findViewById(R.id.progress_circular_parent);
 
         final RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(mParentActivity, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(new NewFeedCardFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
+        mRecyclerView.addItemDecoration(new NewFeedSourceFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         mUIHandler = new Handler(Looper.getMainLooper());
         AsyncThreadPool.init(mUIHandler);
         mThreadPool = AsyncThreadPool.get();
+        adapter = new NewsFeedSourceListAdapter(mParentActivity, mSourceModelList);
+
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -89,41 +87,36 @@ public class NewFeedCardFragment extends BaseFragment implements HTTPResponseLis
     }
 
 
-
     @Override
     public Boolean setGetStatus(JSONObject finalResult, String getUrl, int responseCode) {
         if (getUrl.equalsIgnoreCase(NewFeedApi.GET_SOURCE_API)) {
             if (finalResult != null) {
 
 
-
                 try {
+                    hideLoading();
 
-                   JSONArray jsonArray = finalResult.getJSONArray("sources");
+                    JSONArray jsonArray = finalResult.getJSONArray("sources");
                     if (jsonArray.length() > 0) {
                         for (int i = 0; i < jsonArray.length(); i++) {
 
                             JSONObject obj = jsonArray.getJSONObject(i);
                             SourceModel appObj = new SourceModel(obj);
 
-                            if(!mSourceModelList.contains(appObj.getmName()))
+                            if (!mSourceModelList.contains(appObj.getmName()))
                                 mSourceModelList.add(appObj);
 
 
                         }
                         Log.e("logtag", "" + mSourceModelList.size());
                     }
-                    mProgreesBarLayout.setVisibility(View.GONE);
 
 
                     Collections.shuffle(mSourceModelList);
 
 
-                    adapter = new NewsFeedSourceListAdapter(mParentActivity, mSourceModelList);
                     mRecyclerView.setAdapter(adapter);
-                }
-
-                catch (JSONException e) {
+                } catch (JSONException e) {
                 }
             }
         }
@@ -136,16 +129,25 @@ public class NewFeedCardFragment extends BaseFragment implements HTTPResponseLis
     }
 
     private void fetchSuggestions() {
-        //if (Util.haveNetworkConnection(mParentActivity)) {
-            mProgreesBarLayout.setVisibility(View.VISIBLE);
+        if(mSourceModelList.size()==0) {
             HttpGet getSuggestionRequest = new HttpGet(this, NewFeedApi.GET_SOURCE_API);
             getSuggestionRequest.run(NewFeedApi.GET_SOURCE_API);
-        //}
+        }
 
 
 
     }
 
+    public void showLoading() {
+        hideLoading();
+        mProgressDialog = CommonUtils.showLoadingDialog(getActivity());
+    }
+
+    public void hideLoading() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.cancel();
+        }
+    }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -200,5 +202,7 @@ public class NewFeedCardFragment extends BaseFragment implements HTTPResponseLis
     public String getActionBarTitle() {
         return "HAgentSuggestionCardFragment";
     }
+
+
 }
 

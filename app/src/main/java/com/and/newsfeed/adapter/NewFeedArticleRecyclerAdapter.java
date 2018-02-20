@@ -35,10 +35,10 @@ public class NewFeedArticleRecyclerAdapter extends RecyclerView.Adapter<NewFeedA
 
         public SimpleItemViewHolder(View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.imageThumb);
-            title = (TextView) itemView.findViewById(R.id.title);
-            subTitle = (TextView) itemView.findViewById(R.id.subTitle);
-            cardView = (CardView) itemView.findViewById(R.id.cardView);
+            image = (ImageView) itemView.findViewById(R.id.thumbnail);
+            title = (TextView) itemView.findViewById(R.id.news_title);
+            subTitle = (TextView) itemView.findViewById(R.id.published_time);
+            cardView = (CardView) itemView.findViewById(R.id.card_view);
         }
     }
 
@@ -70,7 +70,7 @@ public class NewFeedArticleRecyclerAdapter extends RecyclerView.Adapter<NewFeedA
 
        // viewHolder.image.setImageURI(Uri.parse(items.get(position).getUrlToImage()));
         viewHolder.title.setText(items.get(position).getTitle());
-        //viewHolder.subTitle.setText(items.get(position).getDescription());
+        viewHolder.subTitle.setText(items.get(position).getPublishedAt());
         Glide
                 .with(context)
                 .load(items.get(position).getUrlToImage())
