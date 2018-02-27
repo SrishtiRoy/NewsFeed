@@ -1,6 +1,7 @@
 package com.and.newsfeed.ui;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.and.newsfeed.R;
 import com.and.newsfeed.adapter.NewFeedArticleRecyclerAdapter;
+import com.and.newsfeed.data.ArticleModel;
+
+import java.util.List;
 
 /**
  * Created by srishtic on 2/22/18.
@@ -15,6 +19,7 @@ import com.and.newsfeed.adapter.NewFeedArticleRecyclerAdapter;
 
 public class FavouriteActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
+   private List<ArticleModel> mArticleList;
 
 
     @Override
