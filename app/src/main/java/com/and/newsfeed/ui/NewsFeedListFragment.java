@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -73,7 +74,6 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
     private RecyclerView mRecyclerView;
     private ImageView mImageView;
     private TextView titleTextView, subTitleTextView;
-    private ImageButton btnLike;
     private View tintView;
     private View mBackgroundView;
           private RelativeLayout  mContainer;
@@ -86,6 +86,7 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
     private Rect finalBounds;
     private  FancyButton btnUrlink;
     private  String mHtmlString="";
+    private FloatingActionButton fab;
 
     @Nullable
     @Override
@@ -226,9 +227,6 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
         mBackgroundView.setScaleX(startScaleX);
         mBackgroundView.setScaleY(startScaleY);
 
-        btnLike.setScaleX(0.0f);
-        btnLike.setScaleY(0.0f);
-
 
 
         // backgroundView Color Animator
@@ -304,7 +302,7 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
     }
 
     private void animateLikeButton() {
-        btnLike.animate().setDuration(LIKE_BTN_ANIMATION_DURATION).scaleX(1f).scaleY(1f);
+        //btnLike.animate().setDuration(LIKE_BTN_ANIMATION_DURATION).scaleX(1f).scaleY(1f);
     }
 
 
@@ -418,7 +416,6 @@ public class NewsFeedListFragment extends  BaseFragment  implements View.OnClick
         mContentLayout  = (ScrollView)view. findViewById(R.id.contentLayout);
         mRecyclerView = (RecyclerView)view. findViewById(R.id.recyclerView);
         tintView =( View)view.findViewById(R.id.tintViewFront);
-        btnLike = (ImageButton) view.findViewById(R.id.btnLike);
         mImageView = (ImageView)view. findViewById(R.id.imageView);
         titleTextView = (TextView)view. findViewById(R.id.title);
         subTitleTextView = (TextView) view.findViewById(R.id.description_text);

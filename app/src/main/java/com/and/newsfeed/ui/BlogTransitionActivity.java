@@ -371,7 +371,6 @@ public class BlogTransitionActivity extends AppCompatActivity {
         mContentLayout  = (ScrollView) findViewById(R.id.contentLayout);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         tintView = findViewById(R.id.tintViewFront);
-        btnLike = (ImageButton) findViewById(R.id.btnLike);
         mImageView = (ImageView) findViewById(R.id.imageView);
         titleTextView = (TextView) findViewById(R.id.title);
     }

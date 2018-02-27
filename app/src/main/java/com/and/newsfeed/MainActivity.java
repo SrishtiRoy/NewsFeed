@@ -88,44 +88,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showNextView(new NewFeedSourceFragment());
     }
 
-
-    /*public void collapseToolbar() {
-        mAppBarLayout.setActivated(false);
-        collapsingToolbarLayout.setTitleEnabled(false);
-        AppBarLayout.LayoutParams p = (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
-        p.setScrollFlags(0);
-        collapsingToolbarLayout.setLayoutParams(p);
-        collapsingToolbarLayout.setActivated(false);
-        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
-        lp.height = getResources().getDimensionPixelSize(R.dimen.toolbar_height);
-        collapsingToolbarLayout.requestLayout();
-
-    }
-
-    public void enableCollapse()
-    {
-        mAppBarLayout.setActivated(true);
-        collapsingToolbarLayout.setActivated(true);
-        collapsingToolbarLayout.setTitleEnabled(true);
-        AppBarLayout.LayoutParams p = (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
-        p.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
-        collapsingToolbarLayout.setLayoutParams(p);
-        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
-        lp.height = getResources().getDimensionPixelSize(R.dimen.toolbar_expanded_height);
-        mAppBarLayout.requestLayout();
-    }*/
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
         toggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
         toggle.onConfigurationChanged(newConfig);
     }
+
 
     @Override
     public void onBackPressed() {

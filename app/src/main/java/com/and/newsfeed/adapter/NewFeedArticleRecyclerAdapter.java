@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.and.newsfeed.R;
 import com.and.newsfeed.data.ArticleModel;
+import com.and.newsfeed.utils.DateUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class NewFeedArticleRecyclerAdapter extends RecyclerView.Adapter<NewFeedA
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
+    // Provide a suitable constructor (depends on the kind of dataset)x
     public NewFeedArticleRecyclerAdapter(Context ctx,List<ArticleModel> items) {
         this.items = items;
         this.context=ctx;
@@ -70,7 +71,7 @@ public class NewFeedArticleRecyclerAdapter extends RecyclerView.Adapter<NewFeedA
 
        // viewHolder.image.setImageURI(Uri.parse(items.get(position).getUrlToImage()));
         viewHolder.title.setText(items.get(position).getTitle());
-        viewHolder.subTitle.setText(items.get(position).getPublishedAt());
+        viewHolder.subTitle.setText(DateUtil.manipulateDateFormat(items.get(position).getPublishedAt()));
         Glide
                 .with(context)
                 .load(items.get(position).getUrlToImage())
